@@ -39,6 +39,41 @@
 <!-- javascript - when complete transfer this code to the app.js file and link -->
 <script type="text/javascript">
 
+// pseudo code: 
+//-----global variables-------
+// create an array/object that contains all the trivia questions and answers and a img/giph associated with random answers and a correct answer
+// create var for randomQuestion
+// create var for choices (displays 3 wrong and 1 correct answer)
+// create var for userPick
+// create var for clock
+// create var for correctAnswer
+// create var for correctCounter
+// create var for wrongCounter
+// create var for unansweredCounter
+// create var for totalCount
+
+//-------functions------------
+// assign a random question to the var randomQuestion from object containing all questions
+// display randomQuestion on DOM
+// display choices related to randomQuestion on DOM
+// if button clicked (user clicks)
+	// onClick (), {stops clock, assign value of buttonID clicked to userPick
+	// evaluate -> compare userPick === correctAnswer -> 
+		// if === correctAnswer then: winner
+		// if /= correctAnswer then: loser --> display correct answer
+	// pause for few seconds then next question}
+// else if time runs out 
+	//else if (clock == 0) {display "out of time", display correct answer, increase counter, pause few seconds then move to next question}
+// Game over when totalCount = X (certain # questions)
+// When game over, stop clock, display # correct, # incorrect, display startover button
+// when startOver pushed, resets game, new clock timer, new question/choices
+
+// -----------------
+// * (The scenario is similar for wrong answers and time-outs.
+//   * If the player runs out of time, tell the player that time's up and display the correct answer. Wait a few seconds, then show the next question.
+//   * If the player chooses the wrong answer, tell the player they selected the wrong option and then display the correct answer. Wait a few seconds, then show the next question.)
+///////////////////////////////////////////////////////////////////////////////////
+
 
 </script>
 
