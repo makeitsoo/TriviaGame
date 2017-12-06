@@ -27,7 +27,7 @@
 							<hr>
 							<div class="answers"></div>
 							<hr>
-							<div class="result"></div>
+							<div id="result"></div>
  						</div>
   					</div> <!-- panel body -->
 				</div> <!-- panel -->
@@ -169,6 +169,7 @@ var wrongCounter = 0;
 var unansweredCounter = 0;
 var totalCount = 0;
 var indexOfCurrentQuestion = 0;
+var result = "";
 
 
 //----------------------functions-------------------------//
@@ -191,11 +192,30 @@ function printQuestionToHTML(question) {
   		if(index === correctAnswer) {
   			// WINNER
   			console.log('winner');
-  			// document.getElementById('result').innerHTML("That's right! Congrats!");
-  			nextQuestion();
+
+  			// display success message
+  			$("#result").html = "Winner! Congrats!";
+  			// display image/giph
+
+  			// delay 4 seconds and move to next question
+  			delayButtonAlert = setTimeout(function() {
+	          console.log("4 second delay before nextQuestion");
+  				nextQuestion();
+	        }, 4000);
   		} else {
   			// LOSER
-  			console.log('loser');
+  			console.log("loser")
+  			// display result message
+  			$("#result").html = "Sorry... Wrong answer";
+  			// display correctAnswer
+
+  			// display image/giph
+
+  			// delay 4 seconds and move to next question
+  			delayButtonAlert = setTimeout(function() {
+	          console.log("4 second delay before nextQuestion");
+  				nextQuestion();
+	        }, 4000);
   		}
   	});
   	$('.answers').append(newButton);
