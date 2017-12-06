@@ -23,7 +23,8 @@
 				<div class="panel panel-default">
   					<div class="panel-body">
  						<div class="quizArea">
-
+							<div class="question"></div>
+							<div class="answers"></div>
  						</div>
   					</div> <!-- panel body -->
 				</div> <!-- panel -->
@@ -79,133 +80,136 @@
 //----------------------------Global Variables---------------------------------//
 
 // create array of objects with question/answer combos
-// var questions = [
-//   {
-//     question: "Which Packer player was nicknamed the 'Minister of Defense'?",
-//     answers: {
-//       a: "Clay Matthews",
-//       b: "Reggie White",
-//       c: "Gilbert Brown",
-//       d: "Charles Woodson"
-//     },
-//     correctAnswer: "b"
-//   },
-//   {
-//     question: " In what round of the 1956 draft was QB Bart Starr selected?",
-//     answers: {
-//       a: "First round",
-//       b: "17th round",
-//       c: "Third round",
-//       d: "Ninth round"
-//     },
-//     correctAnswer: "b"
-//   },
-//   {
-//     question: "Which Packer player holds the record for all-time leading scorer in franchise history?",
-//     answers: {
-//       a: "Don Hutson",
-//       b: "Brett Favre",
-//       c: "Aaron Rodgers",
-//       d: "Mason Crosby"
-//     },
-//     correctAnswer: "d"
-//   },
-//   {
-//     question: "What was the final score of Super Bowl I?",
-//     answers: {
-//       a: "10-23 Kansas City",
-//       b: "33-14 Green Bay",
-//       c: "35-10 Green Bay",
-//       d: "23-10 Green Bay"
-//     },
-//     correctAnswer: "c"
-//   },
-//   {
-//     question: "In 2011, Aaron Rodgers broke the record for highest single-season passer rating. What rating did he finish with that year?",
-//     answers: {
-//       a: "122.5",
-//       b: "131.7",
-//       c: "101.4",
-//       d: "99.8"
-//     },
-//     correctAnswer: "a"
-//   },
-//   {
-//     question: "What year did the Packers join the American Professional Football Association?",
-//     answers: {
-//       a: "1921",
-//       b: "1930",
-//       c: "1955",
-//       d: "1937"
-//     },
-//     correctAnswer: "a"
-//   },
-//   {
-//     question: "To whom did Brett Favre complete his first career pass?",
-//     answers: {
-//       a: "Michael Haynes",
-//       b: "Brett Favre",
-//       c: "Antonio Freeman",
-//       d: "Andre Rison"
-//     },
-//     correctAnswer: "b"
-//   }
-// ];
+var questions = [
+  // {
+  //   question: "Which Packer player was nicknamed the 'Minister of Defense'?",
+  //   answers: {
+  //     a: "Clay Matthews",
+  //     b: "Reggie White",
+  //     c: "Gilbert Brown",
+  //     d: "Charles Woodson"
+  //   },
+  //   correctAnswer: "b"
+  // },
+  // {
+  //   question: " In what round of the 1956 draft was QB Bart Starr selected?",
+  //   answers: {
+  //     a: "First round",
+  //     b: "17th round",
+  //     c: "Third round",
+  //     d: "Ninth round"
+  //   },
+  //   correctAnswer: "b"
+  // },
+  // {
+  //   question: "Which Packer player holds the record for all-time leading scorer in franchise history?",
+  //   answers: {
+  //     a: "Don Hutson",
+  //     b: "Brett Favre",
+  //     c: "Aaron Rodgers",
+  //     d: "Mason Crosby"
+  //   },
+  //   correctAnswer: "d"
+  // },
+  // {
+  //   question: "What was the final score of Super Bowl I?",
+  //   answers: {
+  //     a: "10-23 Kansas City",
+  //     b: "33-14 Green Bay",
+  //     c: "35-10 Green Bay",
+  //     d: "23-10 Green Bay"
+  //   },
+  //   correctAnswer: "c"
+  // },
+  // {
+  //   question: "In 2011, Aaron Rodgers broke the record for highest single-season passer rating. What rating did he finish with that year?",
+  //   answers: {
+  //     a: "122.5",
+  //     b: "131.7",
+  //     c: "101.4",
+  //     d: "99.8"
+  //   },
+  //   correctAnswer: "a"
+  // },
+  // {
+  //   question: "What year did the Packers join the American Professional Football Association?",
+  //   answers: {
+  //     a: "1921",
+  //     b: "1930",
+  //     c: "1955",
+  //     d: "1937"
+  //   },
+  //   correctAnswer: "a"
+  // },
+  {
+    text: "To whom did Brett Favre complete his first career pass?",
+    answers: [
+      "Michael Haynes",
+      "Brett Favre",
+      "Antonio Freeman",
+      "Andre Rison"
+    ],
+    correctAnswer: 1, // starts at 0 valid => 0 - 3
+  }
+];
 
 // console.log(questions);
-var question = "To whom did Brett Favre complete his first career pass?";
-var answers = { a: "Michael Haynes",
-      			b: "Brett Favre",
-      			c: "Antonio Freeman",
-      			d: "Andre Rison"
-};
-var correctAnswer = "b";
 
-// var randomQuestion;
+var randomQuestion;
 var htmlOutput = [];
 var answerOpt = [];
 var userPick;
 var timer;
+var correctAnswer;
 var correctCounter = 0;
 var wrongCounter = 0;
 var unansweredCounter = 0;
 var totalCount = 0;
-
+var indexOfCurrentQuestion = 0;
 
 
 //----------------------functions-------------------------//
 
+function printQuestionToHTML(question) {
+
+  $('.question').html(question.text);
+
+  //reset contents of answers
+  $('.answers').html('');
+
+  var answers = question.answers;
+  var correctAnswer = question.correctAnswer;
+
+  answers.forEach(function(anAnswer, index){
+  	var newButton = $('<button>');
+  	console.log(newButton);
+  	newButton.text(anAnswer);
+  	newButton.on('click', function(event){
+  		if(index === correctAnswer) {
+  			// WINNER
+  			console.log('winner');
+  		} else {
+  			// LOSER
+  			console.log('loser');
+  		}
+  	});
+  	$('.answers').append(newButton);
+  })
+  
+}
+
 // function to display quiz in DOM
 function domQuiz(){
   // // var to store the HTML output
-   htmlOutput = [];
-	// instead of starting with array of objects could simplify and start with var question=, var answer=, and build from there.
-	question = "To whom did Brett Favre complete his first career pass?";
-	answers = { a: "Michael Haynes",
-	      			b: "Brett Favre",
-	      			c: "Antonio Freeman",
-	      			d: "Andre Rison"
-	};
-	correctAnswer = "b";
-
-	console.log(answers.d);
-	htmlOutput.push(answers);
-	console.log(htmlOutput);
+   var currentQuestion = questions[indexOfCurrentQuestion];
+   printQuestionToHTML(currentQuestion);
   // for each question...
 	// questions.forEach(myFunction);
+	// assign a random question to the var randomQuestion from object containing all questions
+	// display randomQuestion on DOM
+	// display choices related to randomQuestion on DOM
 
-	// function myFunction (item, index) {
-
-	//   for( var key in item ) {
-	//     // console.log(item[key])
-	//   	// var to store the list of answer options
- //      	var answerOpt = item[key];
- //      	console.log(answerOpt);
-      	// console.log(key);
-      	// htmlOutput.push(item);
-      	// console.log(questions)
-      	// console.log(htmlOutput);
-	  // }
+	// instead of starting with array of objects could simplify and start with var question=, var answer=, and build
 
       // add the question and its answers to the htmlOutput
       // htmlOutput.push(
@@ -216,6 +220,12 @@ function domQuiz(){
 
   // // combine htmlOutput list into one string of HTML and display in DOM
   // document.getElementById("quizArea").innerHTML = htmlOutput.join('');
+}
+
+function nextQuestion() {
+	//random index
+	indexOfCurrentQuestion = MAth.random
+	domQuiz()
 }
 domQuiz();
 
