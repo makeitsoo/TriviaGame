@@ -24,7 +24,10 @@
   					<div class="panel-body">
  						<div class="quizArea">
 							<div class="question"></div>
+							<hr>
 							<div class="answers"></div>
+							<hr>
+							<div class="result"></div>
  						</div>
   					</div> <!-- panel body -->
 				</div> <!-- panel -->
@@ -81,66 +84,66 @@
 
 // create array of objects with question/answer combos
 var questions = [
-  // {
-  //   question: "Which Packer player was nicknamed the 'Minister of Defense'?",
-  //   answers: {
-  //     a: "Clay Matthews",
-  //     b: "Reggie White",
-  //     c: "Gilbert Brown",
-  //     d: "Charles Woodson"
-  //   },
-  //   correctAnswer: "b"
-  // },
-  // {
-  //   question: " In what round of the 1956 draft was QB Bart Starr selected?",
-  //   answers: {
-  //     a: "First round",
-  //     b: "17th round",
-  //     c: "Third round",
-  //     d: "Ninth round"
-  //   },
-  //   correctAnswer: "b"
-  // },
-  // {
-  //   question: "Which Packer player holds the record for all-time leading scorer in franchise history?",
-  //   answers: {
-  //     a: "Don Hutson",
-  //     b: "Brett Favre",
-  //     c: "Aaron Rodgers",
-  //     d: "Mason Crosby"
-  //   },
-  //   correctAnswer: "d"
-  // },
-  // {
-  //   question: "What was the final score of Super Bowl I?",
-  //   answers: {
-  //     a: "10-23 Kansas City",
-  //     b: "33-14 Green Bay",
-  //     c: "35-10 Green Bay",
-  //     d: "23-10 Green Bay"
-  //   },
-  //   correctAnswer: "c"
-  // },
-  // {
-  //   question: "In 2011, Aaron Rodgers broke the record for highest single-season passer rating. What rating did he finish with that year?",
-  //   answers: {
-  //     a: "122.5",
-  //     b: "131.7",
-  //     c: "101.4",
-  //     d: "99.8"
-  //   },
-  //   correctAnswer: "a"
-  // },
-  // {
-  //   question: "What year did the Packers join the American Professional Football Association?",
-  //   answers: {
-  //     a: "1921",
-  //     b: "1930",
-  //     c: "1955",
-  //     d: "1937"
-  //   },
-  //   correctAnswer: "a"
-  // },
+  {
+    text: "Which Packer player was nicknamed the 'Minister of Defense'?",
+    answers: [
+      "Clay Matthews",
+      "Reggie White",
+      "Gilbert Brown",
+      "Charles Woodson"
+    ],
+    correctAnswer: 1,
+  },
+  {
+    text: " In what round of the 1956 draft was QB Bart Starr selected?",
+    answers: [
+      "First round",
+      "17th round",
+      "Third round",
+      "Ninth round"
+    ],
+    correctAnswer: 1,
+  },
+  {
+    text: "Which Packer player holds the record for all-time leading scorer in franchise history?",
+    answers: [
+      "Don Hutson",
+      "Brett Favre",
+      "Aaron Rodgers",
+      "Mason Crosby"
+    ],
+    correctAnswer: 3,
+  },
+  {
+    text: "What was the final score of Super Bowl I?",
+    answers: [
+      "10-23 Kansas City",
+      "33-14 Green Bay",
+      "35-10 Green Bay",
+      "23-10 Green Bay"
+    ],
+    correctAnswer: 2,
+  },
+  {
+    text: "In 2011, Aaron Rodgers broke the record for highest single-season passer rating. What rating did he finish with that year?",
+    answers: [
+      "122.5",
+      "131.7",
+      "101.4",
+      "99.8"
+    ],
+    correctAnswer: 0,
+  },
+  {
+    text: "What year did the Packers join the American Professional Football Association?",
+    answers: [
+      "1921",
+      "1930",
+      "1955",
+      "1937"
+    ],
+    correctAnswer: 0,
+  },
   {
     text: "To whom did Brett Favre complete his first career pass?",
     answers: [
@@ -188,6 +191,8 @@ function printQuestionToHTML(question) {
   		if(index === correctAnswer) {
   			// WINNER
   			console.log('winner');
+  			// document.getElementById('result').innerHTML("That's right! Congrats!");
+  			nextQuestion();
   		} else {
   			// LOSER
   			console.log('loser');
@@ -205,7 +210,6 @@ function domQuiz(){
    printQuestionToHTML(currentQuestion);
   // for each question...
 	// questions.forEach(myFunction);
-	// assign a random question to the var randomQuestion from object containing all questions
 	// display randomQuestion on DOM
 	// display choices related to randomQuestion on DOM
 
@@ -223,8 +227,10 @@ function domQuiz(){
 }
 
 function nextQuestion() {
+
+	// assign a random question to the var randomQuestion from object containing all questions
 	//random index
-	indexOfCurrentQuestion = MAth.random
+	indexOfCurrentQuestion = Math.floor(Math.random() * questions.length)
 	domQuiz()
 }
 domQuiz();
