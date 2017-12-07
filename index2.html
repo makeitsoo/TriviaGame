@@ -180,9 +180,11 @@ function printQuestionToHTML(question) {
 
   //reset contents of answers
   $('.answers').html('');
+  $("#result").html('');
 
   var answers = question.answers;
   var correctAnswer = question.correctAnswer;
+
 
   answers.forEach(function(anAnswer, index){
   	var newButton = $('<button>');
@@ -192,30 +194,29 @@ function printQuestionToHTML(question) {
   		if(index === correctAnswer) {
   			// WINNER
   			console.log('winner');
-
+	        console.log("4 second delay before nextQuestion");
   			// display success message
-  			$("#result").html = "Winner! Congrats!";
+  			var resultNote = $("#result").html("Winner! Congrats!");
   			// display image/giph
 
   			// delay 4 seconds and move to next question
   			delayButtonAlert = setTimeout(function() {
-	          console.log("4 second delay before nextQuestion");
   				nextQuestion();
-	        }, 4000);
+	        }, 3000);
   		} else {
   			// LOSER
-  			console.log("loser")
+  			console.log("loser");
+	        console.log("4 second delay before nextQuestion");
   			// display result message
-  			$("#result").html = "Sorry... Wrong answer";
+  			var resultNote = $("#result").html("<p>Sorry... Wrong answer</p>");
   			// display correctAnswer
 
   			// display image/giph
 
   			// delay 4 seconds and move to next question
   			delayButtonAlert = setTimeout(function() {
-	          console.log("4 second delay before nextQuestion");
   				nextQuestion();
-	        }, 4000);
+	        }, 3000);
   		}
   	});
   	$('.answers').append(newButton);
