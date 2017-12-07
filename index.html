@@ -39,10 +39,11 @@
   					<div class="panel-body">
  						<div class="resultsArea">
 							<div>
-								<p class="timer">Seconds Before You Fumble: </p>
+								<p class="fumble">Seconds Before You Fumble: </p>
+								<p class="timer"></p>
 							</div>
-							<hr>
-							<div id="result"></div>
+<!-- 							<hr id="line">
+ -->							<div id="result"></div>
 							<div class="pic"></div>
  						</div>
   					</div> <!-- panel body -->
@@ -178,7 +179,8 @@ var randomQuestion;
 var htmlOutput = [];
 var answerOpt = [];
 var userPick;
-var timer;
+var timer = 20;
+var intervalId;
 var correctAnswer;
 var correctCounter = 0;
 var wrongCounter = 0;
@@ -190,6 +192,37 @@ var result = "";
 
 //----------------------functions-------------------------//
 
+// The run function sets an interval that runs the decrement function once a second for the timer
+function run() {
+  intervalId = setInterval(decrement, 1000);
+  console.log(intervalId);
+}
+
+//  function for decrementing timer 
+function decrement() {
+  //  Decrease timer by one.
+  timer--;
+  console.log(timer);
+  //  Show the number in the #timer tag.
+  $(".timer").html("<p>" + timer + "</p>");
+        //  Once number hits zero...
+  	if (timer === 0) {
+    //  ...run the stop function.
+    stop();
+    // var timer = 20;
+	}
+}
+
+//  The stop function
+function stop() {
+  //  Clears our intervalId
+  //  We just pass the name of the interval
+  //  to the clearInterval function.
+  clearInterval(intervalId);
+}
+
+
+
 // function to display content in DOM 
 function printQuestionToHTML(question) {
 	// displays selected question in DOM in correct div
@@ -198,9 +231,11 @@ function printQuestionToHTML(question) {
   //reset contents of answers
   $('.answers').html('');
   $("#result").html('');
+  // $(".timer").html('');
   // from the selected object containing current question/answer combo which being aliased as "question" in the function parameter, grab the optional anwers and the correct answer and store in new variables 
   var answers = question.answers;
   var correctAnswer = question.correctAnswer;
+  run();
 
   // function for each of the optional answers in the object...
   answers.forEach(function(anAnswer, index){
