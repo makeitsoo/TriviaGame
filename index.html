@@ -45,6 +45,7 @@
 <!-- 							<hr id="line">
  -->							<div id="result"></div>
 							<div class="pic"></div>
+							<div class="answer"></div>
  						</div>
   					</div> <!-- panel body -->
 				</div> <!-- panel -->
@@ -181,7 +182,7 @@ var answerOpt = [];
 var userPick;
 var timer = 20;
 var intervalId;
-var correctAnswer;
+// var correctAnswer;
 var correctCounter = 0;
 var wrongCounter = 0;
 var unansweredCounter = 0;
@@ -194,8 +195,9 @@ var result = "";
 
 // The run function sets an interval that runs the decrement function once a second for the timer
 function run() {
+	var timer = 20; // resetting time back to 20 seconds every time run function
   intervalId = setInterval(decrement, 1000);
-  console.log(intervalId);
+  console.log(timer);
 }
 
 //  function for decrementing timer 
@@ -231,6 +233,7 @@ function printQuestionToHTML(question) {
   //reset contents of answers
   $('.answers').html('');
   $("#result").html('');
+  $(".answer").html('');
   // $(".timer").html('');
   // from the selected object containing current question/answer combo which being aliased as "question" in the function parameter, grab the optional anwers and the correct answer and store in new variables 
   var answers = question.answers;
@@ -251,6 +254,8 @@ function printQuestionToHTML(question) {
   			// log winner
   			console.log('winner');
 	        console.log("4 second delay before nextQuestion");
+	        // call stop function to stop timer
+	        stop();
   			// display success message to user in DOM
   			var resultNote = $("#result").html("Winner! Congrats!");
   			// display image/giph
@@ -268,8 +273,10 @@ function printQuestionToHTML(question) {
 	        console.log("4 second delay before nextQuestion");
   			// display result message to user in DOM
   			var resultNote = $("#result").html("<p>Sorry... Wrong answer</p>");
+  			// call stop function to stop timer
+  			stop();
   			// display correctAnswer
-
+ 			$(".answer").html("<p> The correct answer is: " + answers[correctAnswer] + "</p>");
   			// display image/giph
 
   			// function to delay 3 seconds and move to next question
