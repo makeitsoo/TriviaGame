@@ -17,7 +17,6 @@
 				<div class="jumbotron">
 					<h1>Green Bay Packers Trivia</h1>
 				</div> <!-- jumbotron close-->
-
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
@@ -193,6 +192,14 @@ var result = "";
 
 //----------------------functions-------------------------//
 
+// startGame on click and call startGame function that wraps all functions? 
+// $("#resume").on("click", startGame);
+
+
+// if can figure out how to reset timer back to 20 every time 
+// also trying to get to move to next question when timer == 0 
+// think both of these have to do with scoping issue - do run and decrement functions go inside the printQuestion to HTML or is there another way to pass a variable to other functions?
+
 // The run function sets an interval that runs the decrement function once a second for the timer
 function run() {
 	var timer = 20; // resetting time back to 20 seconds every time run function
@@ -210,8 +217,33 @@ function decrement() {
         //  Once number hits zero...
   	if (timer === 0) {
     //  ...run the stop function.
-    stop();
-    // var timer = 20;
+    // why isnt this printing to console? 
+    	console.log("timer is equal to zero - do something with this");
+    	// display result message to user in DOM
+			var resultNote = $("#result").html("<p>Really? What kind of Packers fan are you? Times up!</p>");
+	        // increment total counter
+	        totalCount++;
+	        // increment counter
+			unansweredCounter++;
+	        console.log("number unaswered: " + unansweredCounter);
+			// call stop function to stop timer
+			stop();
+			// display correctAnswer in DOM
+ 			$(".answer").html("<p> The correct answer is: " + answers[correctAnswer] + "</p>");
+			// display image/giph
+			var displayPic = $(".pic").html("test");
+			// function to delay 3 seconds and move to next question
+			delayButtonAlert = setTimeout(function() {
+				// calls function nextQuestion()
+				nextQuestion();
+				// 3000 milliseconds --> 3 second delay
+        	}, 3000);
+	        if (totalCount === questions.length) {
+	        	gameOver();
+	       	}
+		
+    // otherwise if user choice is incorrect
+		
 	}
 }
 
@@ -234,12 +266,14 @@ function printQuestionToHTML(question) {
   $('.answers').html('');
   $("#result").html('');
   $(".answer").html('');
+  $(".pic").html('');
   // $(".timer").html('');
   // from the selected object containing current question/answer combo which being aliased as "question" in the function parameter, grab the optional anwers and the correct answer and store in new variables 
   var answers = question.answers;
   var correctAnswer = question.correctAnswer;
   run();
-
+  // log total count
+  console.log("Total count: " + totalCount);
   // function for each of the optional answers in the object...
   answers.forEach(function(anAnswer, index){
   	// create a button called newButton
@@ -254,18 +288,54 @@ function printQuestionToHTML(question) {
   			// log winner
   			console.log('winner');
 	        console.log("4 second delay before nextQuestion");
+	        // increment total counter
+	        totalCount++;
+	        // increment correctCounter
+	        correctCounter++;
+	        console.log("number correct: " + correctCounter);
 	        // call stop function to stop timer
 	        stop();
   			// display success message to user in DOM
   			var resultNote = $("#result").html("Winner! Congrats!");
   			// display image/giph
-
+  			var displayPic = $(".pic").html("test");
   			// function to delay 3 seconds and move to next question
   			delayButtonAlert = setTimeout(function() {
   				// calls function nextQuestion()
   				nextQuestion();
   				// 3000 milliseconds --> 3 second delay
 	        }, 3000);
+	        if (totalCount === questions.length) {
+	        	gameOver();
+	       	}
+
+	    // if time is up before the user picks
+	    } else if (timer === 0) {
+	    	// why isnt this printing to console? 
+	    	console.log("timer is equal to zero - do something with this");
+	    	// display result message to user in DOM
+  			var resultNote = $("#result").html("<p>Really? What kind of Packers fan are you? Times up!</p>");
+	        // increment total counter
+	        totalCount++;
+	        // increment unanswered counter
+  			unansweredCounter++;
+	        console.log("number unaswered: " + unansweredCounter);
+  			// call stop function to stop timer
+  			stop();
+  			// display correctAnswer in DOM
+ 			$(".answer").html("<p> The correct answer is: " + answers[correctAnswer] + "</p>");
+  			// display image/giph
+  			var displayPic = $(".pic").html("test");
+  			// function to delay 3 seconds and move to next question
+  			delayButtonAlert = setTimeout(function() {
+  				// calls function nextQuestion()
+  				nextQuestion();
+  				// 3000 milliseconds --> 3 second delay
+	        }, 3000);
+	        if (totalCount === questions.length) {
+	        	gameOver();
+	       	}
+  		
 	    // otherwise if user choice is incorrect
   		} else {
   			// log loser
@@ -273,18 +343,27 @@ function printQuestionToHTML(question) {
 	        console.log("4 second delay before nextQuestion");
   			// display result message to user in DOM
   			var resultNote = $("#result").html("<p>Sorry... Wrong answer</p>");
+	        // increment total counter
+	        totalCount++;
+	        // increment wrongCounter
+  			wrongCounter++;
+	        console.log("number wrong: " + wrongCounter);
   			// call stop function to stop timer
   			stop();
-  			// display correctAnswer
+  			// display correctAnswer in DOM
  			$(".answer").html("<p> The correct answer is: " + answers[correctAnswer] + "</p>");
   			// display image/giph
-
+  			var displayPic = $(".pic").html("test");
   			// function to delay 3 seconds and move to next question
   			delayButtonAlert = setTimeout(function() {
   				// calls function nextQuestion()
   				nextQuestion();
   				// 3000 milliseconds --> 3 second delay
 	        }, 3000);
+	        if (totalCount === questions.length) {
+	        	gameOver();
+	       	}
+
   		}
   	});
   	// display each button in the DOM in the answers element
@@ -299,22 +378,7 @@ function domQuiz(){
    var currentQuestion = questions[indexOfCurrentQuestion];
    // calls function with the currently selected question/answer combo as parameter
    printQuestionToHTML(currentQuestion);
-  // for each question...
-	// questions.forEach(myFunction);
-	// display randomQuestion on DOM
-	// display choices related to randomQuestion on DOM
 
-	// instead of starting with array of objects could simplify and start with var question=, var answer=, and build
-
-      // add the question and its answers to the htmlOutput
-      // htmlOutput.push(
-      //   $(".quizArea").
-      //   <div class="answers"> ${answerOpt.join('')} </div>`
-      // );
-
-
-  // // combine htmlOutput list into one string of HTML and display in DOM
-  // document.getElementById("quizArea").innerHTML = htmlOutput.join('');
 }
 
 function nextQuestion() {
@@ -323,6 +387,17 @@ function nextQuestion() {
 	domQuiz()
 }
 domQuiz();
+
+
+// game over is total count = 7 --> change to questions.length so dynamic
+
+function gameOver() {
+	console.log("Game Over function triggered")
+	// $(".question").html("<h1>GAME OVER</h1>");
+	// var newGame = onClick.$(".answers").html("<button>GAME OVER<button>"); //wrong
+ // 	$("#result").html("<p>Correct Answers: " + correctCounter + "</p>");
+ // 	$(".timer").html("<p>Incorrect Answers: " + wrongCounter + "</p>");
+}
 
 
 
