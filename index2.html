@@ -26,8 +26,24 @@
 							<div class="question"></div>
 							<hr>
 							<div class="answers"></div>
+<!-- 							<hr>
+							<div id="result"></div> -->
+ 						</div>
+  					</div> <!-- panel body -->
+				</div> <!-- panel -->
+			</div> <!-- columns -->
+		</div> <!-- row close -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+  					<div class="panel-body">
+ 						<div class="resultsArea">
+							<div>
+								<p class="timer">Seconds Before You Fumble: </p>
+							</div>
 							<hr>
 							<div id="result"></div>
+							<div class="pic"></div>
  						</div>
   					</div> <!-- panel body -->
 				</div> <!-- panel -->
@@ -208,7 +224,7 @@ function printQuestionToHTML(question) {
   			delayButtonAlert = setTimeout(function() {
   				// calls function nextQuestion()
   				nextQuestion();
-  				// 3000 milliseconds --> 3 second timer
+  				// 3000 milliseconds --> 3 second delay
 	        }, 3000);
 	    // otherwise if user choice is incorrect
   		} else {
@@ -225,7 +241,7 @@ function printQuestionToHTML(question) {
   			delayButtonAlert = setTimeout(function() {
   				// calls function nextQuestion()
   				nextQuestion();
-  				// 3000 milliseconds --> 3 second timer
+  				// 3000 milliseconds --> 3 second delay
 	        }, 3000);
   		}
   	});

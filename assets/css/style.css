@@ -4,14 +4,35 @@ body {
 
 h1 {
 	text-align: center;
+	color: white;
 }
 
-.panel-body {
+.jumbotron {
+	background-color: green;
+}
+
+#result {
+	font-size: 16px;
+	text-align: center;
+}
+
+.question {
 	text-align: center;
 	font-size: 20px;
-
+	color: green;
+	font-style: bold;
+}
+.answers{
+	font-size: 16px;
+	text-align: center;
 }
 
-button {
+.timer {
+	font-size: 16px;
+	text-align: left;
+/*	color: red;
+*/}
+
+/*button {
 	margin:5px 5px 5px 5px;
-}
+}*/
