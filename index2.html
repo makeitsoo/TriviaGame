@@ -174,60 +174,72 @@ var result = "";
 
 //----------------------functions-------------------------//
 
+// function to display content in DOM 
 function printQuestionToHTML(question) {
-
+	// displays selected question in DOM in correct div
   $('.question').html(question.text);
 
   //reset contents of answers
   $('.answers').html('');
   $("#result").html('');
-
+  // from the selected object containing current question/answer combo which being aliased as "question" in the function parameter, grab the optional anwers and the correct answer and store in new variables 
   var answers = question.answers;
   var correctAnswer = question.correctAnswer;
 
-
+  // function for each of the optional answers in the object...
   answers.forEach(function(anAnswer, index){
+  	// create a button called newButton
   	var newButton = $('<button>');
   	console.log(newButton);
+  	// add text from the answer element value to the button
   	newButton.text(anAnswer);
+  	// on click of any of these buttons
   	newButton.on('click', function(event){
+  		// if the user choice is correct
   		if(index === correctAnswer) {
-  			// WINNER
+  			// log winner
   			console.log('winner');
 	        console.log("4 second delay before nextQuestion");
-  			// display success message
+  			// display success message to user in DOM
   			var resultNote = $("#result").html("Winner! Congrats!");
   			// display image/giph
 
-  			// delay 4 seconds and move to next question
+  			// function to delay 3 seconds and move to next question
   			delayButtonAlert = setTimeout(function() {
+  				// calls function nextQuestion()
   				nextQuestion();
+  				// 3000 milliseconds --> 3 second timer
 	        }, 3000);
+	    // otherwise if user choice is incorrect
   		} else {
-  			// LOSER
+  			// log loser
   			console.log("loser");
 	        console.log("4 second delay before nextQuestion");
-  			// display result message
+  			// display result message to user in DOM
   			var resultNote = $("#result").html("<p>Sorry... Wrong answer</p>");
   			// display correctAnswer
 
   			// display image/giph
 
-  			// delay 4 seconds and move to next question
+  			// function to delay 3 seconds and move to next question
   			delayButtonAlert = setTimeout(function() {
+  				// calls function nextQuestion()
   				nextQuestion();
+  				// 3000 milliseconds --> 3 second timer
 	        }, 3000);
   		}
   	});
+  	// display each button in the DOM in the answers element
   	$('.answers').append(newButton);
   })
   
 }
 
-// function to display quiz in DOM
+// function to select object of question/answer combo assoicated with index chosen in the nextQuestion function
 function domQuiz(){
-  // // var to store the HTML output
+  // // var to store the currently selected question/answer combo object
    var currentQuestion = questions[indexOfCurrentQuestion];
+   // calls function with the currently selected question/answer combo as parameter
    printQuestionToHTML(currentQuestion);
   // for each question...
 	// questions.forEach(myFunction);
@@ -248,9 +260,7 @@ function domQuiz(){
 }
 
 function nextQuestion() {
-
-	// assign a random question to the var randomQuestion from object containing all questions
-	//random index
+	// randomly chooses and index from the array containing question/answer combo
 	indexOfCurrentQuestion = Math.floor(Math.random() * questions.length)
 	domQuiz()
 }
