@@ -44,7 +44,9 @@
 <!-- 							<hr id="line">
  -->							<div id="result"></div>
  								<div id="noAnswer"></div>
+ 								<br>
 							<div class="pic"></div>
+							<br>
 							<div class="answer"></div>
  						</div>
   					</div> <!-- panel body -->
@@ -125,7 +127,7 @@ var questions = [
       "Charles Woodson"
     ],
     correctAnswer: 1,
-    // photo: "src='https://cdn-s3.si.com/s3fs-public/sikids/multimedia/photo_gallery/0709/favre.best.pictures/images/33.016323808.jpg' "
+    image: '" <img id="theImg" src="https://cdn-s3.si.com/s3fs-public/sikids/multimedia/photo_gallery/0709/favre.best.pictures/images/33.016323808.jpg" />',
   },
   {
     text: " In what round of the 1956 draft was QB Bart Starr selected?",
@@ -136,6 +138,7 @@ var questions = [
       "Ninth round"
     ],
     correctAnswer: 1,
+    image: ' <img id="theImg" src="assets/images/bartStar.jpg" />',
   },
   {
     text: "Which Packer player holds the record for all-time leading scorer in franchise history?",
@@ -146,6 +149,7 @@ var questions = [
       "Mason Crosby"
     ],
     correctAnswer: 3,
+    image: '" <img id="theImg" src="https://cdn-s3.si.com/s3fs-public/sikids/multimedia/photo_gallery/0709/favre.best.pictures/images/33.016323808.jpg" />',
   },
   {
     text: "What was the final score of Super Bowl I?",
@@ -156,6 +160,7 @@ var questions = [
       "23-10 Green Bay"
     ],
     correctAnswer: 2,
+    image: '" <img id="theImg" src="https://cdn-s3.si.com/s3fs-public/sikids/multimedia/photo_gallery/0709/favre.best.pictures/images/33.016323808.jpg" />',
   },
   {
     text: "In 2011, Aaron Rodgers broke the record for highest single-season passer rating. What rating did he finish with that year?",
@@ -195,7 +200,7 @@ var randomQuestion;
 var htmlOutput = [];
 var answerOpt = [];
 var userPick;
-var timer = 16;
+var timer = 13;
 var intervalId;
 // var correctAnswer;
 var correctCounter = 0;
@@ -256,7 +261,7 @@ function decrement() {
 			// function to delay 3 seconds and move to next question
 			delayButtonAlert = setTimeout(function() {
 				// reset timer to 20 secs
-				timer = 16;
+				timer = 13;
 				// calls function nextQuestion()
 				nextQuestion();
 				// 3000 milliseconds --> 3 second delay
@@ -295,6 +300,7 @@ function printQuestionToHTML(question) {
   // from the selected object containing current question/answer combo which being aliased as "question" in the function parameter, grab the optional anwers and the correct answer and store in new variables 
   var answers = question.answers;
   var correctAnswer = question.correctAnswer;
+  var photo = question.image;
   run();
   // log total count
   console.log("Total count: " + totalCount);
@@ -320,13 +326,13 @@ function printQuestionToHTML(question) {
 	        // call stop function to stop timer
 	        stop();
   			// display success message to user in DOM
-  			var resultNote = $("#result").html("Winner! Congrats!");
+  			var resultNote = $("#result").html("Yes! Winning.");
   			// display image/giph
-  			var displayPic = $(".pic").html("test");
+  			$('.pic').html('<img id="theImg" src="assets/images/winning.jpg" />');
   			// function to delay 3 seconds and move to next question
   			delayButtonAlert = setTimeout(function() {
 				// reset timer to 20 secs
-				timer = 16;
+				timer = 13;
   				// calls function nextQuestion()
   				nextQuestion();
   				// 3000 milliseconds --> 3 second delay
@@ -387,7 +393,7 @@ function printQuestionToHTML(question) {
   			// function to delay 3 seconds and move to next question
   			delayButtonAlert = setTimeout(function() {
 				// reset timer to 20 secs
-				timer = 16;
+				timer = 13;
   				// calls function nextQuestion()
   				nextQuestion();
   				// 3000 milliseconds --> 3 second delay
