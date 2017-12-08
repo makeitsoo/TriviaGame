@@ -39,9 +39,16 @@ h1 {
 	float:left;
 }
 
-#line {
-	float:left;
+#noAnswer {
+	font-size: 16px;
+	text-align: center;
 }
+
+.answer {
+	font-size: 14px;
+	text-align: center;
+}
+
 
 /*button {
 	margin:5px 5px 5px 5px;

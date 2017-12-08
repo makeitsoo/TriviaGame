@@ -38,11 +38,12 @@
   					<div class="panel-body">
  						<div class="resultsArea">
 							<div>
-								<p class="fumble">Seconds Before You Fumble: </p>
+								<p class="fumble"></p>
 								<p class="timer"></p>
 							</div>
 <!-- 							<hr id="line">
  -->							<div id="result"></div>
+ 								<div id="noAnswer"></div>
 							<div class="pic"></div>
 							<div class="answer"></div>
  						</div>
@@ -224,7 +225,6 @@ function run() {
 }
 
 function resetTimer() {
-	// var timer = 16; // resetting time back to 20 seconds every time run function
 	decrement();
 }
 
@@ -234,7 +234,7 @@ function decrement() {
   timer--;
   console.log(timer);
   //  Show the number in the #timer tag.
-  $(".timer").html("<p>" + timer + "</p>");
+  $(".timer").html("<p>Seconds Before You Fumble: " + timer + "</p>");
       //   Once number hits zero...
   	if (timer === 0) {
     //  ...run the stop function.
@@ -423,10 +423,15 @@ domQuiz();
 
 function gameOver() {
 	console.log("Game Over function triggered")
-	// $(".question").html("<h1>GAME OVER</h1>");
+	$(".question").html("<h1>GAME OVER</h1>");
+	var intervalId = 0;
+	$(".timer").html("<p> </p>");
+	$(".answers").html(" ");
+
 	// var newGame = onClick.$(".answers").html("<button>GAME OVER<button>"); //wrong
- // 	$("#result").html("<p>Correct Answers: " + correctCounter + "</p>");
- // 	$(".timer").html("<p>Incorrect Answers: " + wrongCounter + "</p>");
+ 	$("#result").html("<p>Correct Answers: " + correctCounter + "</p>");
+ 	$(".timer").html("<p>Incorrect Answers: " + wrongCounter + "</p>");
+ 	$("#noAnswer").html("<p>Unanswered Questions: " + unansweredCounter + "</p>");
 }
 
 
