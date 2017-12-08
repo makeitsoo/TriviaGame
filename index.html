@@ -290,6 +290,7 @@ function printQuestionToHTML(question) {
   $("#result").html('');
   $(".answer").html('');
   $(".pic").html('');
+  $("#noAnswer").html('');
   // $(".timer").html('');
   // from the selected object containing current question/answer combo which being aliased as "question" in the function parameter, grab the optional anwers and the correct answer and store in new variables 
   var answers = question.answers;
@@ -370,7 +371,7 @@ function printQuestionToHTML(question) {
   			console.log("loser");
 	        console.log("4 second delay before nextQuestion");
   			// display result message to user in DOM
-  			var resultNote = $("#result").html("<p>Sorry... Wrong answer</p>");
+  			var resultNote = $("#result").html("<p>Wrong! What are you a Bears fan!?</p>");
 	        // increment total counter
 	        totalCount++;
 	        // increment wrongCounter
@@ -381,7 +382,8 @@ function printQuestionToHTML(question) {
   			// display correctAnswer in DOM
  			$(".answer").html("<p> The correct answer is: " + answers[correctAnswer] + "</p>");
   			// display image/giph
-  			var displayPic = $(".pic").html("test");
+  			$('.pic').html('<img id="theImg" src="assets/images/loserPic.jpg" />');
+  			// var displayPic = $(".pic").html("<img>Correct Answers: " + correctCounter + "</img>");
   			// function to delay 3 seconds and move to next question
   			delayButtonAlert = setTimeout(function() {
 				// reset timer to 20 secs
@@ -432,6 +434,10 @@ function gameOver() {
  	$("#result").html("<p>Correct Answers: " + correctCounter + "</p>");
  	$(".timer").html("<p>Incorrect Answers: " + wrongCounter + "</p>");
  	$("#noAnswer").html("<p>Unanswered Questions: " + unansweredCounter + "</p>");
+ 	totalCount = 0;
+ 	correctCounter = 0;
+ 	wrongCounter = 0;
+ 	unansweredCounter = 0;
 }
 
 
