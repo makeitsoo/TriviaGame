@@ -45,9 +45,9 @@
  -->							<div id="result"></div>
  								<div id="noAnswer"></div>
  								<br>
-							<div class="pic"></div>
-							<br>
 							<div class="answer"></div>
+							<br>
+							<div class="pic"></div>
  						</div>
   					</div> <!-- panel body -->
 				</div> <!-- panel -->
@@ -239,14 +239,14 @@ function decrement() {
   timer--;
   console.log(timer);
   //  Show the number in the #timer tag.
-  $(".timer").html("<p>Seconds Before You Fumble: " + timer + "</p>");
+  $(".timer").html("<p>Play clock at: " + timer + "</p>");
       //   Once number hits zero...
   	if (timer === 0) {
     //  ...run the stop function.
     // why isnt this printing to console? 
     	console.log("timer is equal to zero - do something with this");
     	// display result message to user in DOM
-			var resultNote = $("#result").html("<p>Really? What kind of Packers fan are you? Times up!</p>");
+			var resultNote = $("#result").html("<p>Delay of game. 5 yard penalty and loss of down.</p>");
 	        // increment total counter
 	        totalCount++;
 	        // increment counter
@@ -257,7 +257,7 @@ function decrement() {
 			// display correctAnswer in DOM
  			// $(".answer").html("<p> The correct answer is: " + answers[correctAnswer] + "</p>");
 			// display image/giph
-			var displayPic = $(".pic").html("test");
+  			$('.pic').html('<img id="theImg1" src="assets/images/flag.jpg" />');
 			// function to delay 3 seconds and move to next question
 			delayButtonAlert = setTimeout(function() {
 				// reset timer to 20 secs
@@ -328,7 +328,7 @@ function printQuestionToHTML(question) {
   			// display success message to user in DOM
   			var resultNote = $("#result").html("Yes! Winning.");
   			// display image/giph
-  			$('.pic').html('<img id="theImg" src="assets/images/winning.jpg" />');
+  			$('.pic').html('<img id="theImg2" src="assets/images/winning.jpg" />');
   			// function to delay 3 seconds and move to next question
   			delayButtonAlert = setTimeout(function() {
 				// reset timer to 20 secs
@@ -388,7 +388,7 @@ function printQuestionToHTML(question) {
   			// display correctAnswer in DOM
  			$(".answer").html("<p> The correct answer is: " + answers[correctAnswer] + "</p>");
   			// display image/giph
-  			$('.pic').html('<img id="theImg" src="assets/images/loserPic.jpg" />');
+  			$('.pic').html('<img id="theImg3" src="assets/images/loserPic1.jpg" />');
   			// var displayPic = $(".pic").html("<img>Correct Answers: " + correctCounter + "</img>");
   			// function to delay 3 seconds and move to next question
   			delayButtonAlert = setTimeout(function() {
@@ -431,7 +431,7 @@ domQuiz();
 
 function gameOver() {
 	console.log("Game Over function triggered")
-	$(".question").html("<h1>GAME OVER</h1>");
+
 	var intervalId = 0;
 	$(".timer").html("<p> </p>");
 	$(".answers").html(" ");
@@ -440,10 +440,24 @@ function gameOver() {
  	$("#result").html("<p>Correct Answers: " + correctCounter + "</p>");
  	$(".timer").html("<p>Incorrect Answers: " + wrongCounter + "</p>");
  	$("#noAnswer").html("<p>Unanswered Questions: " + unansweredCounter + "</p>");
+
+
+ 	if (correctCounter > wrongCounter) {
+ 		$('.pic').html('<img id="theImg4" src="assets/images/winner.jpg" />');
+		$(".question").html("<h1>GAME OVER. WINNER!</h1>");
+		console.log("Game Over. Winner")
+ 	}
+
+ 	else {
+ 		$('.pic').html('<img id="theImg4" src="assets/images/loser.png" />');
+		$(".question").html("<h1>GAME OVER. You Lose...</h1>");
+		console.log("Game Over. Loser")
+ 	}
  	totalCount = 0;
  	correctCounter = 0;
  	wrongCounter = 0;
  	unansweredCounter = 0;
+
 }
 
 
