@@ -183,14 +183,12 @@ var questions = [
 ];
 
 
-
+// Global Variables 
 var randomQuestion;
 var htmlOutput = [];
 var answerOpt = [];
-var userPick;
 var timer = 13;
 var intervalId;
-// var correctAnswer;
 var correctCounter = 0;
 var wrongCounter = 0;
 var unansweredCounter = 0;
@@ -201,8 +199,22 @@ var result = "";
 
 //----------------------functions-------------------------//
 
-// startGame on click and call startGame function that wraps all functions? 
-// $("#resume").on("click", startGame);
+// display button to start game on window load
+window.onload = function() {
+
+    // create new var to hold button tag
+    var newButton1 = $('<button>');
+    // add text to the button
+    newButton1.text("Start Game");
+    // grab the html div where want to display button and text
+    $(".question").html("Press button to start game. You will have 12 seconds for each question.");
+    $(".timer").html(newButton1);
+    // on click of button call the domQuiz function which will start game and select a question/asnwer set to display on DOM
+    newButton1.on('click', function(event){
+      domQuiz();
+  })
+}
+
 
 // The run function sets an interval that runs the decrement function once a second for the timer
 function run() {
@@ -252,7 +264,6 @@ function decrement() {
 	        if (totalCount === questions.length) {
 	        	gameOver();
 	       	}
-				
 	}
 }
 
@@ -263,8 +274,6 @@ function stop() {
   //  to the clearInterval function.
   clearInterval(intervalId);
 }
-
-
 
 // function to display content in DOM 
 function printQuestionToHTML(question) {
@@ -321,8 +330,6 @@ function printQuestionToHTML(question) {
 	        if (totalCount === questions.length) {
 	        	gameOver();
 	       	}
-
-	    
 	    } 
 
 	    // otherwise if user choice is incorrect
@@ -355,13 +362,11 @@ function printQuestionToHTML(question) {
 	        if (totalCount === questions.length) {
 	        	gameOver();
 	       	}
-
   		}
   	});
   	// display each button in the DOM in the answers element
   	$('.answers').append(newButton);
   })
-  
 }
 
 // function to select object of question/answer combo assoicated with index chosen in the nextQuestion function
@@ -370,7 +375,6 @@ function domQuiz(){
    var currentQuestion = questions[indexOfCurrentQuestion];
    // calls function with the currently selected question/answer combo as parameter
    printQuestionToHTML(currentQuestion);
-
 }
 
 function nextQuestion() {
@@ -378,7 +382,7 @@ function nextQuestion() {
 	indexOfCurrentQuestion = Math.floor(Math.random() * questions.length)
 	domQuiz()
 }
-domQuiz();
+
 
 
 // game over is total count = 7 --> change to questions.length so dynamic
@@ -411,7 +415,6 @@ function gameOver() {
  	correctCounter = 0;
  	wrongCounter = 0;
  	unansweredCounter = 0;
-
 }
 
 
