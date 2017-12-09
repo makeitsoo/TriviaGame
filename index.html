@@ -100,19 +100,7 @@
 //   * If the player chooses the wrong answer, tell the player they selected the wrong option and then display the correct answer. Wait a few seconds, then show the next question.)
 ///////////////////////////////////////////////////////////////////////////////////
 
-//----------------------------Giphy API----------------------------------------//
 
-var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
-
-$.ajax({
-  url: queryURL,
-  method: 'GET'
-}).done(function(response) {
-  console.log(response);
-  console.log(response.data)
-
-  // $(".pic").html('<center><img src = "'+ response.data +'"  title="GIF via Giphy"></center>')
-});
 
 //----------------------------Global Variables---------------------------------//
 
@@ -216,11 +204,6 @@ var result = "";
 // startGame on click and call startGame function that wraps all functions? 
 // $("#resume").on("click", startGame);
 
-
-// cant figure out how to reset timer back to 20 every time 
-// also trying to get to move to next question when timer == 0 
-// think both of these have to do with scoping issue - do run and decrement functions go inside the printQuestion to HTML or is there another way to pass a variable to other functions?
-
 // The run function sets an interval that runs the decrement function once a second for the timer
 function run() {
 	// var timer = 20; // resetting time back to 20 seconds every time run function
@@ -269,9 +252,7 @@ function decrement() {
 	        if (totalCount === questions.length) {
 	        	gameOver();
 	       	}
-		
-    // otherwise if user choice is incorrect
-		
+				
 	}
 }
 
@@ -296,7 +277,7 @@ function printQuestionToHTML(question) {
   $(".answer").html('');
   $(".pic").html('');
   $("#noAnswer").html('');
-  // $(".timer").html('');
+
   // from the selected object containing current question/answer combo which being aliased as "question" in the function parameter, grab the optional anwers and the correct answer and store in new variables 
   var answers = question.answers;
   var correctAnswer = question.correctAnswer;
@@ -341,37 +322,10 @@ function printQuestionToHTML(question) {
 	        	gameOver();
 	       	}
 
-	    // if time is up before the user picks
+	    
 	    } 
-	   //  else if (timer === 0) {
-	   //  	// why isnt this printing to console? 
-	   //  	console.log("timer is equal to zero - do something with this");
-	   //  	// display result message to user in DOM
-  		// 	var resultNote = $("#result").html("<p>Really? What kind of Packers fan are you? Times up!</p>");
-	   //      // increment total counter
-	   //      totalCount++;
-	   //      // increment unanswered counter
-  		// 	unansweredCounter++;
-	   //      console.log("number unaswered: " + unansweredCounter);
-  		// 	// call stop function to stop timer
-  		// 	stop();
-  		// 	// display correctAnswer in DOM
- 			// $(".answer").html("<p> The correct answer is: " + answers[correctAnswer] + "</p>");
-  		// 	// display image/giph
-  		// 	var displayPic = $(".pic").html("test");
-  		// 	// function to delay 3 seconds and move to next question
-  		// 	delayButtonAlert = setTimeout(function() {
-  		// 		// calls function nextQuestion()
-  		// 		nextQuestion();
-  		// 		// 3000 milliseconds --> 3 second delay
-	   //      }, 3000);
 
-	   //      if (totalCount === questions.length) {
-	   //      	gameOver();
-	   //     	}
-  		
-	   //  // otherwise if user choice is incorrect
-  		// } 
+	    // otherwise if user choice is incorrect
   		else {
   			// log loser
   			console.log("loser");
